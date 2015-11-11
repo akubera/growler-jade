@@ -31,11 +31,22 @@ class JadeRenderer():
         self.log = logging.getLogger(__name__)
         self.log.info("%d Constructed JadeRenderer" % (id(self)))
 
-    def __call__(self, filename, res):
+    def render_html(self, filename, res):
         self.log.info("%d -> %s" % (id(self), filename))
         tmpl = self._render(filename=filename, preprocessor=self._preprocessor)
         html = tmpl.render(**res.locals)
         return html
+
+    def __call__(self, req, res):
+        """
+        Adds renderer to res object for future
+        """
+        from growler.renderer import Renderer
+
+        if hasattr(res, 'render'):
+            res.render.add_rendering_enging('jade', self)
+        else:
+            res.render = Renderer()
 
     @staticmethod
     def register_engine():

@@ -24,3 +24,14 @@ def test_imports():
 
     assert growler_ext.JadeRenderer is JadeRenderer
     assert growler_ext.jade_renderer is growler_jade
+
+
+def xtest_render_html(renderer, tmpdir):
+    fname = tmpdir + "/file"
+    print(fname)
+    with open(fname, 'w') as f:
+        f.write("""#vid\n  color blue""")
+    m = mock.Mock()
+    renderer.render_html(fname, m)
+
+    assert None

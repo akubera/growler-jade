@@ -11,8 +11,8 @@ from growler_jade.jade_renderer import JadeRenderer
 
 
 @pytest.fixture
-def renderer():
-    return JadeRenderer()
+def renderer(tmpdir):
+    return JadeRenderer(str(tmpdir))
 
 
 def test_renderer(renderer):
@@ -24,3 +24,14 @@ def test_imports():
 
     assert growler_ext.JadeRenderer is JadeRenderer
     assert growler_ext.jade_renderer is growler_jade
+
+
+def xtest_render_html(renderer, tmpdir):
+    fname = tmpdir + "/file"
+    print(fname)
+    with open(fname, 'w') as f:
+        f.write("""#vid\n  color blue""")
+    m = mock.Mock()
+    renderer.render_html(fname, m)
+
+    assert None

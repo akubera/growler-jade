@@ -14,6 +14,7 @@ NAME = 'growler-jade'
 
 REQUIRES = [
     'pyjade',
+    'mako',
 ]
 
 OPTIONAL_REQUIRES = {

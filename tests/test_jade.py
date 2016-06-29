@@ -11,8 +11,8 @@ from growler_jade.jade_renderer import JadeRenderer
 
 
 @pytest.fixture
-def renderer():
-    return JadeRenderer()
+def renderer(tmpdir):
+    return JadeRenderer(str(tmpdir))
 
 
 def test_renderer(renderer):
